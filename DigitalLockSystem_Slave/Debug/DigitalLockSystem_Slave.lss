@@ -1,0 +1,2019 @@
+
+DigitalLockSystem_Slave.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000009fc  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         000000e8  00800060  000009fc  00000a70  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .stab         00001e24  00000000  00000000  00000b58  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000f81  00000000  00000000  0000297c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	11 e0       	ldi	r17, 0x01	; 1
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec ef       	ldi	r30, 0xFC	; 252
+  68:	f9 e0       	ldi	r31, 0x09	; 9
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a8 34       	cpi	r26, 0x48	; 72
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+  76:	0e 94 90 03 	call	0x720	; 0x720 <main>
+  7a:	0c 94 fc 04 	jmp	0x9f8	; 0x9f8 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <HDM_voidStopMotor>:
+}
+
+void HDM_voidStopMotor()
+{
+
+	MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN1,MDIO_LOW);
+  82:	80 e0       	ldi	r24, 0x00	; 0
+  84:	61 e0       	ldi	r22, 0x01	; 1
+  86:	40 e0       	ldi	r20, 0x00	; 0
+  88:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+	MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN0,MDIO_LOW);
+  8c:	80 e0       	ldi	r24, 0x00	; 0
+  8e:	60 e0       	ldi	r22, 0x00	; 0
+  90:	40 e0       	ldi	r20, 0x00	; 0
+  92:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+
+}
+  96:	08 95       	ret
+
+00000098 <HDM_voidMoveMotor>:
+}
+
+
+void HDM_voidMoveMotor(u8 ARG_u8Direction)
+{
+	switch(ARG_u8Direction)
+  98:	8a 30       	cpi	r24, 0x0A	; 10
+  9a:	21 f0       	breq	.+8      	; 0xa4 <HDM_voidMoveMotor+0xc>
+  9c:	84 31       	cpi	r24, 0x14	; 20
+  9e:	09 f0       	breq	.+2      	; 0xa2 <HDM_voidMoveMotor+0xa>
+  a0:	3e c0       	rjmp	.+124    	; 0x11e <HDM_voidMoveMotor+0x86>
+  a2:	1f c0       	rjmp	.+62     	; 0xe2 <HDM_voidMoveMotor+0x4a>
+	{
+		
+		case HDM_CLOCKWISE:
+		{
+			MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN0,MDIO_HIGH);
+  a4:	80 e0       	ldi	r24, 0x00	; 0
+  a6:	60 e0       	ldi	r22, 0x00	; 0
+  a8:	41 e0       	ldi	r20, 0x01	; 1
+  aa:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+  ae:	20 e1       	ldi	r18, 0x10	; 16
+  b0:	37 e2       	ldi	r19, 0x27	; 39
+  b2:	48 ec       	ldi	r20, 0xC8	; 200
+  b4:	50 e0       	ldi	r21, 0x00	; 0
+  b6:	ca 01       	movw	r24, r20
+  b8:	01 97       	sbiw	r24, 0x01	; 1
+  ba:	f1 f7       	brne	.-4      	; 0xb8 <HDM_voidMoveMotor+0x20>
+  bc:	21 50       	subi	r18, 0x01	; 1
+  be:	30 40       	sbci	r19, 0x00	; 0
+  c0:	d1 f7       	brne	.-12     	; 0xb6 <HDM_voidMoveMotor+0x1e>
+			_delay_ms(HDM_DELAY);
+			
+			MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN1,MDIO_LOW);
+  c2:	80 e0       	ldi	r24, 0x00	; 0
+  c4:	61 e0       	ldi	r22, 0x01	; 1
+  c6:	40 e0       	ldi	r20, 0x00	; 0
+  c8:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+  cc:	20 e1       	ldi	r18, 0x10	; 16
+  ce:	37 e2       	ldi	r19, 0x27	; 39
+  d0:	48 ec       	ldi	r20, 0xC8	; 200
+  d2:	50 e0       	ldi	r21, 0x00	; 0
+  d4:	ca 01       	movw	r24, r20
+  d6:	01 97       	sbiw	r24, 0x01	; 1
+  d8:	f1 f7       	brne	.-4      	; 0xd6 <HDM_voidMoveMotor+0x3e>
+  da:	21 50       	subi	r18, 0x01	; 1
+  dc:	30 40       	sbci	r19, 0x00	; 0
+  de:	d1 f7       	brne	.-12     	; 0xd4 <HDM_voidMoveMotor+0x3c>
+  e0:	08 95       	ret
+			break;
+		}
+		
+		case HDM_ANTI_CLOCKWISE:
+		{
+			MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN1,MDIO_HIGH);
+  e2:	80 e0       	ldi	r24, 0x00	; 0
+  e4:	61 e0       	ldi	r22, 0x01	; 1
+  e6:	41 e0       	ldi	r20, 0x01	; 1
+  e8:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+  ec:	20 e1       	ldi	r18, 0x10	; 16
+  ee:	37 e2       	ldi	r19, 0x27	; 39
+  f0:	48 ec       	ldi	r20, 0xC8	; 200
+  f2:	50 e0       	ldi	r21, 0x00	; 0
+  f4:	ca 01       	movw	r24, r20
+  f6:	01 97       	sbiw	r24, 0x01	; 1
+  f8:	f1 f7       	brne	.-4      	; 0xf6 <HDM_voidMoveMotor+0x5e>
+  fa:	21 50       	subi	r18, 0x01	; 1
+  fc:	30 40       	sbci	r19, 0x00	; 0
+  fe:	d1 f7       	brne	.-12     	; 0xf4 <HDM_voidMoveMotor+0x5c>
+			_delay_ms(HDM_DELAY);
+			
+			MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN0,MDIO_LOW);
+ 100:	80 e0       	ldi	r24, 0x00	; 0
+ 102:	60 e0       	ldi	r22, 0x00	; 0
+ 104:	40 e0       	ldi	r20, 0x00	; 0
+ 106:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+ 10a:	20 e1       	ldi	r18, 0x10	; 16
+ 10c:	37 e2       	ldi	r19, 0x27	; 39
+ 10e:	48 ec       	ldi	r20, 0xC8	; 200
+ 110:	50 e0       	ldi	r21, 0x00	; 0
+ 112:	ca 01       	movw	r24, r20
+ 114:	01 97       	sbiw	r24, 0x01	; 1
+ 116:	f1 f7       	brne	.-4      	; 0x114 <HDM_voidMoveMotor+0x7c>
+ 118:	21 50       	subi	r18, 0x01	; 1
+ 11a:	30 40       	sbci	r19, 0x00	; 0
+ 11c:	d1 f7       	brne	.-12     	; 0x112 <HDM_voidMoveMotor+0x7a>
+ 11e:	08 95       	ret
+
+00000120 <HDM_voidInitialize>:
+#include "HDM_Config.h"
+
+
+void HDM_voidInitialize()
+{
+	MDIO_voidSetPortDirection(HDM_BRIDGEPORT,0xFF);
+ 120:	80 e0       	ldi	r24, 0x00	; 0
+ 122:	6f ef       	ldi	r22, 0xFF	; 255
+ 124:	0e 94 69 01 	call	0x2d2	; 0x2d2 <MDIO_voidSetPortDirection>
+	MDIO_voidSetPortValue(HDM_BRIDGEPORT,0x00);
+ 128:	80 e0       	ldi	r24, 0x00	; 0
+ 12a:	60 e0       	ldi	r22, 0x00	; 0
+ 12c:	0e 94 82 01 	call	0x304	; 0x304 <MDIO_voidSetPortValue>
+}
+ 130:	08 95       	ret
+
+00000132 <HLCD_voidSetCursor>:
+}
+
+void HLCD_voidSetCursor(u8 ARG_u8CursorLocation)
+{
+
+}
+ 132:	08 95       	ret
+
+00000134 <HLCD_voidWriteData>:
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_HIGH);// this is for ensuring that theres a rising edge
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+}
+void HLCD_voidWriteData(u8 ARG_u8Data)
+{
+ 134:	ff 92       	push	r15
+ 136:	0f 93       	push	r16
+ 138:	1f 93       	push	r17
+ 13a:	f8 2e       	mov	r15, r24
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_RSPin,MDIO_HIGH);
+ 13c:	83 e0       	ldi	r24, 0x03	; 3
+ 13e:	62 e0       	ldi	r22, 0x02	; 2
+ 140:	41 e0       	ldi	r20, 0x01	; 1
+ 142:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 146:	00 e1       	ldi	r16, 0x10	; 16
+ 148:	17 e2       	ldi	r17, 0x27	; 39
+ 14a:	c8 01       	movw	r24, r16
+ 14c:	01 97       	sbiw	r24, 0x01	; 1
+ 14e:	f1 f7       	brne	.-4      	; 0x14c <HLCD_voidWriteData+0x18>
+	_delay_ms(5);
+	MDIO_voidSetPortValue(HLCD_DataPort,ARG_u8Data);
+ 150:	82 e0       	ldi	r24, 0x02	; 2
+ 152:	6f 2d       	mov	r22, r15
+ 154:	0e 94 82 01 	call	0x304	; 0x304 <MDIO_voidSetPortValue>
+ 158:	c8 01       	movw	r24, r16
+ 15a:	01 97       	sbiw	r24, 0x01	; 1
+ 15c:	f1 f7       	brne	.-4      	; 0x15a <HLCD_voidWriteData+0x26>
+	_delay_ms(5);
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+ 15e:	83 e0       	ldi	r24, 0x03	; 3
+ 160:	63 e0       	ldi	r22, 0x03	; 3
+ 162:	40 e0       	ldi	r20, 0x00	; 0
+ 164:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+ 168:	c8 01       	movw	r24, r16
+ 16a:	01 97       	sbiw	r24, 0x01	; 1
+ 16c:	f1 f7       	brne	.-4      	; 0x16a <HLCD_voidWriteData+0x36>
+	_delay_ms(5);
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_HIGH);// this is for ensuring that theres a rising edge
+ 16e:	83 e0       	ldi	r24, 0x03	; 3
+ 170:	63 e0       	ldi	r22, 0x03	; 3
+ 172:	41 e0       	ldi	r20, 0x01	; 1
+ 174:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+ 178:	c8 01       	movw	r24, r16
+ 17a:	01 97       	sbiw	r24, 0x01	; 1
+ 17c:	f1 f7       	brne	.-4      	; 0x17a <HLCD_voidWriteData+0x46>
+	_delay_ms(5);
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+ 17e:	83 e0       	ldi	r24, 0x03	; 3
+ 180:	63 e0       	ldi	r22, 0x03	; 3
+ 182:	40 e0       	ldi	r20, 0x00	; 0
+ 184:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+ 188:	c8 01       	movw	r24, r16
+ 18a:	01 97       	sbiw	r24, 0x01	; 1
+ 18c:	f1 f7       	brne	.-4      	; 0x18a <HLCD_voidWriteData+0x56>
+	_delay_ms(5);
+}
+ 18e:	1f 91       	pop	r17
+ 190:	0f 91       	pop	r16
+ 192:	ff 90       	pop	r15
+ 194:	08 95       	ret
+
+00000196 <HLCD_voidSetString>:
+		}
+	}
+}
+
+void HLCD_voidSetString(s8* ARG_u8String)
+{
+ 196:	cf 93       	push	r28
+ 198:	df 93       	push	r29
+ 19a:	fc 01       	movw	r30, r24
+	u32 i;
+	for(i=0;ARG_u8String[i]!=0;i++)
+ 19c:	80 81       	ld	r24, Z
+ 19e:	88 23       	and	r24, r24
+ 1a0:	39 f0       	breq	.+14     	; 0x1b0 <HLCD_voidSetString+0x1a>
+ 1a2:	ef 01       	movw	r28, r30
+	{
+		HLCD_voidWriteData(ARG_u8String[i]);
+ 1a4:	0e 94 9a 00 	call	0x134	; 0x134 <HLCD_voidWriteData>
+}
+
+void HLCD_voidSetString(s8* ARG_u8String)
+{
+	u32 i;
+	for(i=0;ARG_u8String[i]!=0;i++)
+ 1a8:	89 81       	ldd	r24, Y+1	; 0x01
+ 1aa:	21 96       	adiw	r28, 0x01	; 1
+ 1ac:	88 23       	and	r24, r24
+ 1ae:	d1 f7       	brne	.-12     	; 0x1a4 <HLCD_voidSetString+0xe>
+	{
+		HLCD_voidWriteData(ARG_u8String[i]);
+	}
+
+}
+ 1b0:	df 91       	pop	r29
+ 1b2:	cf 91       	pop	r28
+ 1b4:	08 95       	ret
+
+000001b6 <HLCD_voidWriteCommand>:
+#include "MDIO_interface.h"
+#include "HLCD_interface.h"
+#include "HLCD_private.h"
+
+void HLCD_voidWriteCommand(u8 ARG_u8Command)
+{
+ 1b6:	1f 93       	push	r17
+ 1b8:	18 2f       	mov	r17, r24
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_RSPin,MDIO_LOW);
+ 1ba:	83 e0       	ldi	r24, 0x03	; 3
+ 1bc:	62 e0       	ldi	r22, 0x02	; 2
+ 1be:	40 e0       	ldi	r20, 0x00	; 0
+ 1c0:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+	MDIO_voidSetPortValue(HLCD_DataPort,ARG_u8Command);
+ 1c4:	82 e0       	ldi	r24, 0x02	; 2
+ 1c6:	61 2f       	mov	r22, r17
+ 1c8:	0e 94 82 01 	call	0x304	; 0x304 <MDIO_voidSetPortValue>
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+ 1cc:	83 e0       	ldi	r24, 0x03	; 3
+ 1ce:	63 e0       	ldi	r22, 0x03	; 3
+ 1d0:	40 e0       	ldi	r20, 0x00	; 0
+ 1d2:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_HIGH);// this is for ensuring that theres a rising edge
+ 1d6:	83 e0       	ldi	r24, 0x03	; 3
+ 1d8:	63 e0       	ldi	r22, 0x03	; 3
+ 1da:	41 e0       	ldi	r20, 0x01	; 1
+ 1dc:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+ 1e0:	83 e0       	ldi	r24, 0x03	; 3
+ 1e2:	63 e0       	ldi	r22, 0x03	; 3
+ 1e4:	40 e0       	ldi	r20, 0x00	; 0
+ 1e6:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+}
+ 1ea:	1f 91       	pop	r17
+ 1ec:	08 95       	ret
+
+000001ee <HLCD_voidDeleteLastChar>:
+		HLCD_voidWriteCommand((ARG_u8Pos & 0x0F)|0xC0);	/* Command of first row and required position<16 */
+	HLCD_voidSetString(ARG_u8String);		/* Call LCD string function */
+}
+void HLCD_voidDeleteLastChar()
+{
+	HLCD_voidWriteCommand(0x10);
+ 1ee:	80 e1       	ldi	r24, 0x10	; 16
+ 1f0:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	HLCD_voidWriteData(' ');
+ 1f4:	80 e2       	ldi	r24, 0x20	; 32
+ 1f6:	0e 94 9a 00 	call	0x134	; 0x134 <HLCD_voidWriteData>
+	HLCD_voidWriteCommand(0x10);
+ 1fa:	80 e1       	ldi	r24, 0x10	; 16
+ 1fc:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+}
+ 200:	08 95       	ret
+
+00000202 <HLCD_voidSetStringXYPos>:
+		HLCD_voidWriteData(ARG_u8String[i]);
+	}
+
+}
+void HLCD_voidSetStringXYPos(u8 ARG_u8Row, u8 ARG_u8Pos, s8 *ARG_u8String) /* Send string to LCD with xy position */
+{
+ 202:	cf 93       	push	r28
+ 204:	df 93       	push	r29
+ 206:	ea 01       	movw	r28, r20
+	if (ARG_u8Row == 0 && ARG_u8Pos<16)
+ 208:	88 23       	and	r24, r24
+ 20a:	41 f4       	brne	.+16     	; 0x21c <HLCD_voidSetStringXYPos+0x1a>
+ 20c:	60 31       	cpi	r22, 0x10	; 16
+ 20e:	78 f4       	brcc	.+30     	; 0x22e <HLCD_voidSetStringXYPos+0x2c>
+		HLCD_voidWriteCommand((ARG_u8Pos & 0x0F)|0x80);	/* Command of first row and required position<16 */
+ 210:	86 2f       	mov	r24, r22
+ 212:	8f 70       	andi	r24, 0x0F	; 15
+ 214:	80 68       	ori	r24, 0x80	; 128
+ 216:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 21a:	09 c0       	rjmp	.+18     	; 0x22e <HLCD_voidSetStringXYPos+0x2c>
+	else if (ARG_u8Row == 1 && ARG_u8Pos<16)
+ 21c:	81 30       	cpi	r24, 0x01	; 1
+ 21e:	39 f4       	brne	.+14     	; 0x22e <HLCD_voidSetStringXYPos+0x2c>
+ 220:	60 31       	cpi	r22, 0x10	; 16
+ 222:	28 f4       	brcc	.+10     	; 0x22e <HLCD_voidSetStringXYPos+0x2c>
+		HLCD_voidWriteCommand((ARG_u8Pos & 0x0F)|0xC0);	/* Command of first row and required position<16 */
+ 224:	86 2f       	mov	r24, r22
+ 226:	8f 70       	andi	r24, 0x0F	; 15
+ 228:	80 6c       	ori	r24, 0xC0	; 192
+ 22a:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	HLCD_voidSetString(ARG_u8String);		/* Call LCD string function */
+ 22e:	ce 01       	movw	r24, r28
+ 230:	0e 94 cb 00 	call	0x196	; 0x196 <HLCD_voidSetString>
+}
+ 234:	df 91       	pop	r29
+ 236:	cf 91       	pop	r28
+ 238:	08 95       	ret
+
+0000023a <HLCD_voidCustomChar>:
+{
+
+}
+
+void HLCD_voidCustomChar(u8 ARG_Location,u8* ARG_u8String)
+{
+ 23a:	0f 93       	push	r16
+ 23c:	1f 93       	push	r17
+ 23e:	cf 93       	push	r28
+ 240:	df 93       	push	r29
+ 242:	8b 01       	movw	r16, r22
+	u8 i;
+	if(ARG_Location < 8)
+ 244:	88 30       	cpi	r24, 0x08	; 8
+ 246:	90 f4       	brcc	.+36     	; 0x26c <HLCD_voidCustomChar+0x32>
+	{
+		HLCD_voidWriteCommand(0x40 + (ARG_Location* 8));
+ 248:	88 0f       	add	r24, r24
+ 24a:	88 0f       	add	r24, r24
+ 24c:	88 0f       	add	r24, r24
+ 24e:	80 5c       	subi	r24, 0xC0	; 192
+ 250:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 254:	c0 e0       	ldi	r28, 0x00	; 0
+ 256:	d0 e0       	ldi	r29, 0x00	; 0
+		for(i = 0 ; i < 8 ; i++)
+		{
+			HLCD_voidWriteData(ARG_u8String[i]);
+ 258:	f8 01       	movw	r30, r16
+ 25a:	ec 0f       	add	r30, r28
+ 25c:	fd 1f       	adc	r31, r29
+ 25e:	80 81       	ld	r24, Z
+ 260:	0e 94 9a 00 	call	0x134	; 0x134 <HLCD_voidWriteData>
+ 264:	21 96       	adiw	r28, 0x01	; 1
+{
+	u8 i;
+	if(ARG_Location < 8)
+	{
+		HLCD_voidWriteCommand(0x40 + (ARG_Location* 8));
+		for(i = 0 ; i < 8 ; i++)
+ 266:	c8 30       	cpi	r28, 0x08	; 8
+ 268:	d1 05       	cpc	r29, r1
+ 26a:	b1 f7       	brne	.-20     	; 0x258 <HLCD_voidCustomChar+0x1e>
+		{
+			HLCD_voidWriteData(ARG_u8String[i]);
+		}
+	}
+}
+ 26c:	df 91       	pop	r29
+ 26e:	cf 91       	pop	r28
+ 270:	1f 91       	pop	r17
+ 272:	0f 91       	pop	r16
+ 274:	08 95       	ret
+
+00000276 <HLCD_voidInitialize>:
+	_delay_ms(5);
+	MDIO_voidSetPinValue(HLCD_ControlPort,HLCD_EnPin,MDIO_LOW);
+	_delay_ms(5);
+}
+void HLCD_voidInitialize()
+{
+ 276:	0f 93       	push	r16
+ 278:	1f 93       	push	r17
+	MDIO_voidSetPortDirection(HLCD_DataPort,0xFF);
+ 27a:	82 e0       	ldi	r24, 0x02	; 2
+ 27c:	6f ef       	ldi	r22, 0xFF	; 255
+ 27e:	0e 94 69 01 	call	0x2d2	; 0x2d2 <MDIO_voidSetPortDirection>
+ 282:	00 e1       	ldi	r16, 0x10	; 16
+ 284:	17 e2       	ldi	r17, 0x27	; 39
+ 286:	c8 01       	movw	r24, r16
+ 288:	01 97       	sbiw	r24, 0x01	; 1
+ 28a:	f1 f7       	brne	.-4      	; 0x288 <HLCD_voidInitialize+0x12>
+	_delay_ms(5);
+	MDIO_voidSetPinDirection(HLCD_ControlPort,HLCD_RSPin,MDIO_HIGH);
+ 28c:	83 e0       	ldi	r24, 0x03	; 3
+ 28e:	62 e0       	ldi	r22, 0x02	; 2
+ 290:	41 e0       	ldi	r20, 0x01	; 1
+ 292:	0e 94 ad 01 	call	0x35a	; 0x35a <MDIO_voidSetPinDirection>
+ 296:	c8 01       	movw	r24, r16
+ 298:	01 97       	sbiw	r24, 0x01	; 1
+ 29a:	f1 f7       	brne	.-4      	; 0x298 <HLCD_voidInitialize+0x22>
+	_delay_ms(5);
+	MDIO_voidSetPinDirection(HLCD_ControlPort,HLCD_EnPin,MDIO_HIGH);
+ 29c:	83 e0       	ldi	r24, 0x03	; 3
+ 29e:	63 e0       	ldi	r22, 0x03	; 3
+ 2a0:	41 e0       	ldi	r20, 0x01	; 1
+ 2a2:	0e 94 ad 01 	call	0x35a	; 0x35a <MDIO_voidSetPinDirection>
+ 2a6:	c8 01       	movw	r24, r16
+ 2a8:	01 97       	sbiw	r24, 0x01	; 1
+ 2aa:	f1 f7       	brne	.-4      	; 0x2a8 <HLCD_voidInitialize+0x32>
+	_delay_ms(5);
+	//Fn set 0b00111000
+	HLCD_voidWriteCommand(0x38);
+ 2ac:	88 e3       	ldi	r24, 0x38	; 56
+ 2ae:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	//Entry Mode
+	HLCD_voidWriteCommand(0x07);
+ 2b2:	87 e0       	ldi	r24, 0x07	; 7
+ 2b4:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	//Home Position , DIsplay on, Cursor off
+	HLCD_voidWriteCommand(0x0C);
+ 2b8:	8c e0       	ldi	r24, 0x0C	; 12
+ 2ba:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	//Clear Display
+	HLCD_voidWriteCommand(0x01);
+ 2be:	81 e0       	ldi	r24, 0x01	; 1
+ 2c0:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 2c4:	80 e2       	ldi	r24, 0x20	; 32
+ 2c6:	9e e4       	ldi	r25, 0x4E	; 78
+ 2c8:	01 97       	sbiw	r24, 0x01	; 1
+ 2ca:	f1 f7       	brne	.-4      	; 0x2c8 <HLCD_voidInitialize+0x52>
+	_delay_ms(10);//or 2 , 5
+}
+ 2cc:	1f 91       	pop	r17
+ 2ce:	0f 91       	pop	r16
+ 2d0:	08 95       	ret
+
+000002d2 <MDIO_voidSetPortDirection>:
+#include "LBIT_math.h"
+#include "MDIO_private.h"
+#include "MDIO_interface.h"
+void MDIO_voidSetPortDirection( u8 ARG_u8PORT,u8 ARG_u8Direction)// User must supply direction for all of the 8 pins
+{
+	switch(ARG_u8PORT)
+ 2d2:	81 30       	cpi	r24, 0x01	; 1
+ 2d4:	59 f0       	breq	.+22     	; 0x2ec <MDIO_voidSetPortDirection+0x1a>
+ 2d6:	81 30       	cpi	r24, 0x01	; 1
+ 2d8:	28 f0       	brcs	.+10     	; 0x2e4 <MDIO_voidSetPortDirection+0x12>
+ 2da:	82 30       	cpi	r24, 0x02	; 2
+ 2dc:	59 f0       	breq	.+22     	; 0x2f4 <MDIO_voidSetPortDirection+0x22>
+ 2de:	83 30       	cpi	r24, 0x03	; 3
+ 2e0:	81 f4       	brne	.+32     	; 0x302 <MDIO_voidSetPortDirection+0x30>
+ 2e2:	0c c0       	rjmp	.+24     	; 0x2fc <MDIO_voidSetPortDirection+0x2a>
+	{
+		case MDIO_PORTA:
+		{
+			GPIOA -> DDR = ARG_u8Direction;
+ 2e4:	e9 e3       	ldi	r30, 0x39	; 57
+ 2e6:	f0 e0       	ldi	r31, 0x00	; 0
+ 2e8:	61 83       	std	Z+1, r22	; 0x01
+ 2ea:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTB:
+		{
+			GPIOB -> DDR = ARG_u8Direction;
+ 2ec:	e6 e3       	ldi	r30, 0x36	; 54
+ 2ee:	f0 e0       	ldi	r31, 0x00	; 0
+ 2f0:	61 83       	std	Z+1, r22	; 0x01
+ 2f2:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTC:
+		{
+			GPIOC -> DDR = ARG_u8Direction;
+ 2f4:	e3 e3       	ldi	r30, 0x33	; 51
+ 2f6:	f0 e0       	ldi	r31, 0x00	; 0
+ 2f8:	61 83       	std	Z+1, r22	; 0x01
+ 2fa:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTD:
+		{
+			GPIOD -> DDR = ARG_u8Direction;
+ 2fc:	e0 e3       	ldi	r30, 0x30	; 48
+ 2fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 300:	61 83       	std	Z+1, r22	; 0x01
+ 302:	08 95       	ret
+
+00000304 <MDIO_voidSetPortValue>:
+		}
+	}
+}
+void MDIO_voidSetPortValue	  (	u8 ARG_u8Port,u8 ARG_u8Value)
+{
+	switch(ARG_u8Port)
+ 304:	81 30       	cpi	r24, 0x01	; 1
+ 306:	59 f0       	breq	.+22     	; 0x31e <MDIO_voidSetPortValue+0x1a>
+ 308:	81 30       	cpi	r24, 0x01	; 1
+ 30a:	28 f0       	brcs	.+10     	; 0x316 <MDIO_voidSetPortValue+0x12>
+ 30c:	82 30       	cpi	r24, 0x02	; 2
+ 30e:	59 f0       	breq	.+22     	; 0x326 <MDIO_voidSetPortValue+0x22>
+ 310:	83 30       	cpi	r24, 0x03	; 3
+ 312:	81 f4       	brne	.+32     	; 0x334 <MDIO_voidSetPortValue+0x30>
+ 314:	0c c0       	rjmp	.+24     	; 0x32e <MDIO_voidSetPortValue+0x2a>
+	{
+		case MDIO_PORTA:
+		{
+			GPIOA -> PORT = ARG_u8Value;
+ 316:	e9 e3       	ldi	r30, 0x39	; 57
+ 318:	f0 e0       	ldi	r31, 0x00	; 0
+ 31a:	62 83       	std	Z+2, r22	; 0x02
+ 31c:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTB:
+		{
+			GPIOB -> PORT = ARG_u8Value;
+ 31e:	e6 e3       	ldi	r30, 0x36	; 54
+ 320:	f0 e0       	ldi	r31, 0x00	; 0
+ 322:	62 83       	std	Z+2, r22	; 0x02
+ 324:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTC:
+		{
+			GPIOC -> PORT = ARG_u8Value;
+ 326:	e3 e3       	ldi	r30, 0x33	; 51
+ 328:	f0 e0       	ldi	r31, 0x00	; 0
+ 32a:	62 83       	std	Z+2, r22	; 0x02
+ 32c:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTD:
+		{
+			GPIOD -> PORT = ARG_u8Value;
+ 32e:	e0 e3       	ldi	r30, 0x30	; 48
+ 330:	f0 e0       	ldi	r31, 0x00	; 0
+ 332:	62 83       	std	Z+2, r22	; 0x02
+ 334:	08 95       	ret
+
+00000336 <MDIO_u8GetPortValue>:
+} 
+u8 	 MDIO_u8GetPortValue      (	u8 ARG_u8Port)
+{
+	//LOCAL Variable doesn't need the SWC name like L_MDIO_u8PortInput
+	u8 L_u8PortInput=0;
+	switch (ARG_u8Port)
+ 336:	81 30       	cpi	r24, 0x01	; 1
+ 338:	51 f0       	breq	.+20     	; 0x34e <MDIO_u8GetPortValue+0x18>
+ 33a:	81 30       	cpi	r24, 0x01	; 1
+ 33c:	30 f0       	brcs	.+12     	; 0x34a <MDIO_u8GetPortValue+0x14>
+ 33e:	82 30       	cpi	r24, 0x02	; 2
+ 340:	41 f0       	breq	.+16     	; 0x352 <MDIO_u8GetPortValue+0x1c>
+ 342:	83 30       	cpi	r24, 0x03	; 3
+ 344:	41 f0       	breq	.+16     	; 0x356 <MDIO_u8GetPortValue+0x20>
+ 346:	80 e0       	ldi	r24, 0x00	; 0
+ 348:	08 95       	ret
+	{
+		case MDIO_PORTA:
+		{
+			L_u8PortInput = GPIOA -> PIN;
+ 34a:	89 b3       	in	r24, 0x19	; 25
+ 34c:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTB:
+		{
+			L_u8PortInput = GPIOB -> PIN;
+ 34e:	86 b3       	in	r24, 0x16	; 22
+ 350:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTC:
+		{
+			L_u8PortInput = GPIOC -> PIN;
+ 352:	83 b3       	in	r24, 0x13	; 19
+ 354:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTD:
+		{
+			L_u8PortInput = GPIOD -> PIN;
+ 356:	80 b3       	in	r24, 0x10	; 16
+			//Report an Error.
+			break;
+		}
+	}
+	return L_u8PortInput;
+}
+ 358:	08 95       	ret
+
+0000035a <MDIO_voidSetPinDirection>:
+void MDIO_voidSetPinDirection(u8 ARG_u8Port,u8 ARG_u8PinNumber,u8 ARG_u8Direction)
+{
+	switch(ARG_u8Direction)
+ 35a:	44 23       	and	r20, r20
+ 35c:	21 f0       	breq	.+8      	; 0x366 <MDIO_voidSetPinDirection+0xc>
+ 35e:	41 30       	cpi	r20, 0x01	; 1
+ 360:	09 f0       	breq	.+2      	; 0x364 <MDIO_voidSetPinDirection+0xa>
+ 362:	7f c0       	rjmp	.+254    	; 0x462 <MDIO_voidSetPinDirection+0x108>
+ 364:	42 c0       	rjmp	.+132    	; 0x3ea <MDIO_voidSetPinDirection+0x90>
+	{
+		case 0:
+		{
+			switch(ARG_u8Port)
+ 366:	81 30       	cpi	r24, 0x01	; 1
+ 368:	b1 f0       	breq	.+44     	; 0x396 <MDIO_voidSetPinDirection+0x3c>
+ 36a:	81 30       	cpi	r24, 0x01	; 1
+ 36c:	30 f0       	brcs	.+12     	; 0x37a <MDIO_voidSetPinDirection+0x20>
+ 36e:	82 30       	cpi	r24, 0x02	; 2
+ 370:	01 f1       	breq	.+64     	; 0x3b2 <MDIO_voidSetPinDirection+0x58>
+ 372:	83 30       	cpi	r24, 0x03	; 3
+ 374:	09 f0       	breq	.+2      	; 0x378 <MDIO_voidSetPinDirection+0x1e>
+ 376:	75 c0       	rjmp	.+234    	; 0x462 <MDIO_voidSetPinDirection+0x108>
+ 378:	2a c0       	rjmp	.+84     	; 0x3ce <MDIO_voidSetPinDirection+0x74>
+				{
+					case MDIO_PORTA:
+					{
+						CLEAR_BIT(GPIOA->DDR,ARG_u8PinNumber);
+ 37a:	e9 e3       	ldi	r30, 0x39	; 57
+ 37c:	f0 e0       	ldi	r31, 0x00	; 0
+ 37e:	21 81       	ldd	r18, Z+1	; 0x01
+ 380:	81 e0       	ldi	r24, 0x01	; 1
+ 382:	90 e0       	ldi	r25, 0x00	; 0
+ 384:	02 c0       	rjmp	.+4      	; 0x38a <MDIO_voidSetPinDirection+0x30>
+ 386:	88 0f       	add	r24, r24
+ 388:	99 1f       	adc	r25, r25
+ 38a:	6a 95       	dec	r22
+ 38c:	e2 f7       	brpl	.-8      	; 0x386 <MDIO_voidSetPinDirection+0x2c>
+ 38e:	80 95       	com	r24
+ 390:	82 23       	and	r24, r18
+ 392:	81 83       	std	Z+1, r24	; 0x01
+ 394:	08 95       	ret
+						break;
+					}
+					case MDIO_PORTB:
+					{
+						CLEAR_BIT(GPIOB->DDR,ARG_u8PinNumber);
+ 396:	e6 e3       	ldi	r30, 0x36	; 54
+ 398:	f0 e0       	ldi	r31, 0x00	; 0
+ 39a:	21 81       	ldd	r18, Z+1	; 0x01
+ 39c:	81 e0       	ldi	r24, 0x01	; 1
+ 39e:	90 e0       	ldi	r25, 0x00	; 0
+ 3a0:	02 c0       	rjmp	.+4      	; 0x3a6 <MDIO_voidSetPinDirection+0x4c>
+ 3a2:	88 0f       	add	r24, r24
+ 3a4:	99 1f       	adc	r25, r25
+ 3a6:	6a 95       	dec	r22
+ 3a8:	e2 f7       	brpl	.-8      	; 0x3a2 <MDIO_voidSetPinDirection+0x48>
+ 3aa:	80 95       	com	r24
+ 3ac:	82 23       	and	r24, r18
+ 3ae:	81 83       	std	Z+1, r24	; 0x01
+ 3b0:	08 95       	ret
+						break;
+					}
+					case MDIO_PORTC:
+					{
+						CLEAR_BIT(GPIOC->DDR,ARG_u8PinNumber);
+ 3b2:	e3 e3       	ldi	r30, 0x33	; 51
+ 3b4:	f0 e0       	ldi	r31, 0x00	; 0
+ 3b6:	21 81       	ldd	r18, Z+1	; 0x01
+ 3b8:	81 e0       	ldi	r24, 0x01	; 1
+ 3ba:	90 e0       	ldi	r25, 0x00	; 0
+ 3bc:	02 c0       	rjmp	.+4      	; 0x3c2 <MDIO_voidSetPinDirection+0x68>
+ 3be:	88 0f       	add	r24, r24
+ 3c0:	99 1f       	adc	r25, r25
+ 3c2:	6a 95       	dec	r22
+ 3c4:	e2 f7       	brpl	.-8      	; 0x3be <MDIO_voidSetPinDirection+0x64>
+ 3c6:	80 95       	com	r24
+ 3c8:	82 23       	and	r24, r18
+ 3ca:	81 83       	std	Z+1, r24	; 0x01
+ 3cc:	08 95       	ret
+						break;
+					}
+					case MDIO_PORTD:
+					{
+						CLEAR_BIT(GPIOD->DDR,ARG_u8PinNumber);
+ 3ce:	e0 e3       	ldi	r30, 0x30	; 48
+ 3d0:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d2:	21 81       	ldd	r18, Z+1	; 0x01
+ 3d4:	81 e0       	ldi	r24, 0x01	; 1
+ 3d6:	90 e0       	ldi	r25, 0x00	; 0
+ 3d8:	02 c0       	rjmp	.+4      	; 0x3de <MDIO_voidSetPinDirection+0x84>
+ 3da:	88 0f       	add	r24, r24
+ 3dc:	99 1f       	adc	r25, r25
+ 3de:	6a 95       	dec	r22
+ 3e0:	e2 f7       	brpl	.-8      	; 0x3da <MDIO_voidSetPinDirection+0x80>
+ 3e2:	80 95       	com	r24
+ 3e4:	82 23       	and	r24, r18
+ 3e6:	81 83       	std	Z+1, r24	; 0x01
+ 3e8:	08 95       	ret
+				}
+			break;
+		}
+		case 1:
+		{
+			switch(ARG_u8Port)
+ 3ea:	81 30       	cpi	r24, 0x01	; 1
+ 3ec:	a1 f0       	breq	.+40     	; 0x416 <MDIO_voidSetPinDirection+0xbc>
+ 3ee:	81 30       	cpi	r24, 0x01	; 1
+ 3f0:	28 f0       	brcs	.+10     	; 0x3fc <MDIO_voidSetPinDirection+0xa2>
+ 3f2:	82 30       	cpi	r24, 0x02	; 2
+ 3f4:	e9 f0       	breq	.+58     	; 0x430 <MDIO_voidSetPinDirection+0xd6>
+ 3f6:	83 30       	cpi	r24, 0x03	; 3
+ 3f8:	a1 f5       	brne	.+104    	; 0x462 <MDIO_voidSetPinDirection+0x108>
+ 3fa:	27 c0       	rjmp	.+78     	; 0x44a <MDIO_voidSetPinDirection+0xf0>
+				{
+					case MDIO_PORTA:
+					{
+						SET_BIT(GPIOA->DDR,ARG_u8PinNumber);
+ 3fc:	e9 e3       	ldi	r30, 0x39	; 57
+ 3fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 400:	21 81       	ldd	r18, Z+1	; 0x01
+ 402:	81 e0       	ldi	r24, 0x01	; 1
+ 404:	90 e0       	ldi	r25, 0x00	; 0
+ 406:	02 c0       	rjmp	.+4      	; 0x40c <MDIO_voidSetPinDirection+0xb2>
+ 408:	88 0f       	add	r24, r24
+ 40a:	99 1f       	adc	r25, r25
+ 40c:	6a 95       	dec	r22
+ 40e:	e2 f7       	brpl	.-8      	; 0x408 <MDIO_voidSetPinDirection+0xae>
+ 410:	28 2b       	or	r18, r24
+ 412:	21 83       	std	Z+1, r18	; 0x01
+ 414:	08 95       	ret
+						break;
+					}
+					case MDIO_PORTB:
+					{
+						SET_BIT(GPIOB->DDR,ARG_u8PinNumber);
+ 416:	e6 e3       	ldi	r30, 0x36	; 54
+ 418:	f0 e0       	ldi	r31, 0x00	; 0
+ 41a:	21 81       	ldd	r18, Z+1	; 0x01
+ 41c:	81 e0       	ldi	r24, 0x01	; 1
+ 41e:	90 e0       	ldi	r25, 0x00	; 0
+ 420:	02 c0       	rjmp	.+4      	; 0x426 <MDIO_voidSetPinDirection+0xcc>
+ 422:	88 0f       	add	r24, r24
+ 424:	99 1f       	adc	r25, r25
+ 426:	6a 95       	dec	r22
+ 428:	e2 f7       	brpl	.-8      	; 0x422 <MDIO_voidSetPinDirection+0xc8>
+ 42a:	28 2b       	or	r18, r24
+ 42c:	21 83       	std	Z+1, r18	; 0x01
+ 42e:	08 95       	ret
+						break;
+					}
+					case MDIO_PORTC:
+					{
+						SET_BIT(GPIOC->DDR,ARG_u8PinNumber);
+ 430:	e3 e3       	ldi	r30, 0x33	; 51
+ 432:	f0 e0       	ldi	r31, 0x00	; 0
+ 434:	21 81       	ldd	r18, Z+1	; 0x01
+ 436:	81 e0       	ldi	r24, 0x01	; 1
+ 438:	90 e0       	ldi	r25, 0x00	; 0
+ 43a:	02 c0       	rjmp	.+4      	; 0x440 <MDIO_voidSetPinDirection+0xe6>
+ 43c:	88 0f       	add	r24, r24
+ 43e:	99 1f       	adc	r25, r25
+ 440:	6a 95       	dec	r22
+ 442:	e2 f7       	brpl	.-8      	; 0x43c <MDIO_voidSetPinDirection+0xe2>
+ 444:	28 2b       	or	r18, r24
+ 446:	21 83       	std	Z+1, r18	; 0x01
+ 448:	08 95       	ret
+						break;
+					}
+					case MDIO_PORTD:
+					{
+						SET_BIT(GPIOD->DDR,ARG_u8PinNumber);
+ 44a:	e0 e3       	ldi	r30, 0x30	; 48
+ 44c:	f0 e0       	ldi	r31, 0x00	; 0
+ 44e:	21 81       	ldd	r18, Z+1	; 0x01
+ 450:	81 e0       	ldi	r24, 0x01	; 1
+ 452:	90 e0       	ldi	r25, 0x00	; 0
+ 454:	02 c0       	rjmp	.+4      	; 0x45a <MDIO_voidSetPinDirection+0x100>
+ 456:	88 0f       	add	r24, r24
+ 458:	99 1f       	adc	r25, r25
+ 45a:	6a 95       	dec	r22
+ 45c:	e2 f7       	brpl	.-8      	; 0x456 <MDIO_voidSetPinDirection+0xfc>
+ 45e:	28 2b       	or	r18, r24
+ 460:	21 83       	std	Z+1, r18	; 0x01
+ 462:	08 95       	ret
+
+00000464 <MDIO_voidSetPinValue>:
+
+	}
+}
+void MDIO_voidSetPinValue(u8 ARG_u8Port,u8 ARG_u8PinNumber,u8 ARG_u8Value)
+{
+	switch (ARG_u8Value)
+ 464:	44 23       	and	r20, r20
+ 466:	21 f0       	breq	.+8      	; 0x470 <MDIO_voidSetPinValue+0xc>
+ 468:	41 30       	cpi	r20, 0x01	; 1
+ 46a:	09 f0       	breq	.+2      	; 0x46e <MDIO_voidSetPinValue+0xa>
+ 46c:	7f c0       	rjmp	.+254    	; 0x56c <MDIO_voidSetPinValue+0x108>
+ 46e:	42 c0       	rjmp	.+132    	; 0x4f4 <MDIO_voidSetPinValue+0x90>
+	{
+		case MDIO_LOW:
+		{
+			switch(ARG_u8Port)
+ 470:	81 30       	cpi	r24, 0x01	; 1
+ 472:	b1 f0       	breq	.+44     	; 0x4a0 <MDIO_voidSetPinValue+0x3c>
+ 474:	81 30       	cpi	r24, 0x01	; 1
+ 476:	30 f0       	brcs	.+12     	; 0x484 <MDIO_voidSetPinValue+0x20>
+ 478:	82 30       	cpi	r24, 0x02	; 2
+ 47a:	01 f1       	breq	.+64     	; 0x4bc <MDIO_voidSetPinValue+0x58>
+ 47c:	83 30       	cpi	r24, 0x03	; 3
+ 47e:	09 f0       	breq	.+2      	; 0x482 <MDIO_voidSetPinValue+0x1e>
+ 480:	75 c0       	rjmp	.+234    	; 0x56c <MDIO_voidSetPinValue+0x108>
+ 482:	2a c0       	rjmp	.+84     	; 0x4d8 <MDIO_voidSetPinValue+0x74>
+			{
+				case MDIO_PORTA:
+				{
+					CLEAR_BIT(GPIOA->PORT,ARG_u8PinNumber);
+ 484:	e9 e3       	ldi	r30, 0x39	; 57
+ 486:	f0 e0       	ldi	r31, 0x00	; 0
+ 488:	22 81       	ldd	r18, Z+2	; 0x02
+ 48a:	81 e0       	ldi	r24, 0x01	; 1
+ 48c:	90 e0       	ldi	r25, 0x00	; 0
+ 48e:	02 c0       	rjmp	.+4      	; 0x494 <MDIO_voidSetPinValue+0x30>
+ 490:	88 0f       	add	r24, r24
+ 492:	99 1f       	adc	r25, r25
+ 494:	6a 95       	dec	r22
+ 496:	e2 f7       	brpl	.-8      	; 0x490 <MDIO_voidSetPinValue+0x2c>
+ 498:	80 95       	com	r24
+ 49a:	82 23       	and	r24, r18
+ 49c:	82 83       	std	Z+2, r24	; 0x02
+ 49e:	08 95       	ret
+					break;
+				}
+				case MDIO_PORTB:
+				{
+					CLEAR_BIT(GPIOB->PORT,ARG_u8PinNumber);
+ 4a0:	e6 e3       	ldi	r30, 0x36	; 54
+ 4a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 4a4:	22 81       	ldd	r18, Z+2	; 0x02
+ 4a6:	81 e0       	ldi	r24, 0x01	; 1
+ 4a8:	90 e0       	ldi	r25, 0x00	; 0
+ 4aa:	02 c0       	rjmp	.+4      	; 0x4b0 <MDIO_voidSetPinValue+0x4c>
+ 4ac:	88 0f       	add	r24, r24
+ 4ae:	99 1f       	adc	r25, r25
+ 4b0:	6a 95       	dec	r22
+ 4b2:	e2 f7       	brpl	.-8      	; 0x4ac <MDIO_voidSetPinValue+0x48>
+ 4b4:	80 95       	com	r24
+ 4b6:	82 23       	and	r24, r18
+ 4b8:	82 83       	std	Z+2, r24	; 0x02
+ 4ba:	08 95       	ret
+					break;
+				}
+				case MDIO_PORTC:
+				{
+					CLEAR_BIT(GPIOC->PORT,ARG_u8PinNumber);
+ 4bc:	e3 e3       	ldi	r30, 0x33	; 51
+ 4be:	f0 e0       	ldi	r31, 0x00	; 0
+ 4c0:	22 81       	ldd	r18, Z+2	; 0x02
+ 4c2:	81 e0       	ldi	r24, 0x01	; 1
+ 4c4:	90 e0       	ldi	r25, 0x00	; 0
+ 4c6:	02 c0       	rjmp	.+4      	; 0x4cc <MDIO_voidSetPinValue+0x68>
+ 4c8:	88 0f       	add	r24, r24
+ 4ca:	99 1f       	adc	r25, r25
+ 4cc:	6a 95       	dec	r22
+ 4ce:	e2 f7       	brpl	.-8      	; 0x4c8 <MDIO_voidSetPinValue+0x64>
+ 4d0:	80 95       	com	r24
+ 4d2:	82 23       	and	r24, r18
+ 4d4:	82 83       	std	Z+2, r24	; 0x02
+ 4d6:	08 95       	ret
+					break;
+				}
+				case MDIO_PORTD:
+				{
+					CLEAR_BIT(GPIOD->PORT,ARG_u8PinNumber);
+ 4d8:	e0 e3       	ldi	r30, 0x30	; 48
+ 4da:	f0 e0       	ldi	r31, 0x00	; 0
+ 4dc:	22 81       	ldd	r18, Z+2	; 0x02
+ 4de:	81 e0       	ldi	r24, 0x01	; 1
+ 4e0:	90 e0       	ldi	r25, 0x00	; 0
+ 4e2:	02 c0       	rjmp	.+4      	; 0x4e8 <MDIO_voidSetPinValue+0x84>
+ 4e4:	88 0f       	add	r24, r24
+ 4e6:	99 1f       	adc	r25, r25
+ 4e8:	6a 95       	dec	r22
+ 4ea:	e2 f7       	brpl	.-8      	; 0x4e4 <MDIO_voidSetPinValue+0x80>
+ 4ec:	80 95       	com	r24
+ 4ee:	82 23       	and	r24, r18
+ 4f0:	82 83       	std	Z+2, r24	; 0x02
+ 4f2:	08 95       	ret
+			}
+			break;
+		}
+		case MDIO_HIGH:
+		{
+			switch(ARG_u8Port)
+ 4f4:	81 30       	cpi	r24, 0x01	; 1
+ 4f6:	a1 f0       	breq	.+40     	; 0x520 <MDIO_voidSetPinValue+0xbc>
+ 4f8:	81 30       	cpi	r24, 0x01	; 1
+ 4fa:	28 f0       	brcs	.+10     	; 0x506 <MDIO_voidSetPinValue+0xa2>
+ 4fc:	82 30       	cpi	r24, 0x02	; 2
+ 4fe:	e9 f0       	breq	.+58     	; 0x53a <MDIO_voidSetPinValue+0xd6>
+ 500:	83 30       	cpi	r24, 0x03	; 3
+ 502:	a1 f5       	brne	.+104    	; 0x56c <MDIO_voidSetPinValue+0x108>
+ 504:	27 c0       	rjmp	.+78     	; 0x554 <MDIO_voidSetPinValue+0xf0>
+			{
+				case MDIO_PORTA:
+				{
+					SET_BIT(GPIOA->PORT,ARG_u8PinNumber);
+ 506:	e9 e3       	ldi	r30, 0x39	; 57
+ 508:	f0 e0       	ldi	r31, 0x00	; 0
+ 50a:	22 81       	ldd	r18, Z+2	; 0x02
+ 50c:	81 e0       	ldi	r24, 0x01	; 1
+ 50e:	90 e0       	ldi	r25, 0x00	; 0
+ 510:	02 c0       	rjmp	.+4      	; 0x516 <MDIO_voidSetPinValue+0xb2>
+ 512:	88 0f       	add	r24, r24
+ 514:	99 1f       	adc	r25, r25
+ 516:	6a 95       	dec	r22
+ 518:	e2 f7       	brpl	.-8      	; 0x512 <MDIO_voidSetPinValue+0xae>
+ 51a:	28 2b       	or	r18, r24
+ 51c:	22 83       	std	Z+2, r18	; 0x02
+ 51e:	08 95       	ret
+					break;
+				}
+				case MDIO_PORTB:
+				{
+					SET_BIT(GPIOB->PORT,ARG_u8PinNumber);
+ 520:	e6 e3       	ldi	r30, 0x36	; 54
+ 522:	f0 e0       	ldi	r31, 0x00	; 0
+ 524:	22 81       	ldd	r18, Z+2	; 0x02
+ 526:	81 e0       	ldi	r24, 0x01	; 1
+ 528:	90 e0       	ldi	r25, 0x00	; 0
+ 52a:	02 c0       	rjmp	.+4      	; 0x530 <MDIO_voidSetPinValue+0xcc>
+ 52c:	88 0f       	add	r24, r24
+ 52e:	99 1f       	adc	r25, r25
+ 530:	6a 95       	dec	r22
+ 532:	e2 f7       	brpl	.-8      	; 0x52c <MDIO_voidSetPinValue+0xc8>
+ 534:	28 2b       	or	r18, r24
+ 536:	22 83       	std	Z+2, r18	; 0x02
+ 538:	08 95       	ret
+					break;
+				}
+				case MDIO_PORTC:
+				{
+					SET_BIT(GPIOC->PORT,ARG_u8PinNumber);
+ 53a:	e3 e3       	ldi	r30, 0x33	; 51
+ 53c:	f0 e0       	ldi	r31, 0x00	; 0
+ 53e:	22 81       	ldd	r18, Z+2	; 0x02
+ 540:	81 e0       	ldi	r24, 0x01	; 1
+ 542:	90 e0       	ldi	r25, 0x00	; 0
+ 544:	02 c0       	rjmp	.+4      	; 0x54a <MDIO_voidSetPinValue+0xe6>
+ 546:	88 0f       	add	r24, r24
+ 548:	99 1f       	adc	r25, r25
+ 54a:	6a 95       	dec	r22
+ 54c:	e2 f7       	brpl	.-8      	; 0x546 <MDIO_voidSetPinValue+0xe2>
+ 54e:	28 2b       	or	r18, r24
+ 550:	22 83       	std	Z+2, r18	; 0x02
+ 552:	08 95       	ret
+					break;
+				}
+				case MDIO_PORTD:
+				{
+					SET_BIT(GPIOD->PORT,ARG_u8PinNumber);
+ 554:	e0 e3       	ldi	r30, 0x30	; 48
+ 556:	f0 e0       	ldi	r31, 0x00	; 0
+ 558:	22 81       	ldd	r18, Z+2	; 0x02
+ 55a:	81 e0       	ldi	r24, 0x01	; 1
+ 55c:	90 e0       	ldi	r25, 0x00	; 0
+ 55e:	02 c0       	rjmp	.+4      	; 0x564 <MDIO_voidSetPinValue+0x100>
+ 560:	88 0f       	add	r24, r24
+ 562:	99 1f       	adc	r25, r25
+ 564:	6a 95       	dec	r22
+ 566:	e2 f7       	brpl	.-8      	; 0x560 <MDIO_voidSetPinValue+0xfc>
+ 568:	28 2b       	or	r18, r24
+ 56a:	22 83       	std	Z+2, r18	; 0x02
+ 56c:	08 95       	ret
+
+0000056e <MDIO_u8GetPinValue>:
+	}
+}
+u8 MDIO_u8GetPinValue(u8 ARG_u8PortNumber,u8 ARG_u8PinNumber)
+{
+	u8 L_u8PinInput=0;
+	switch(ARG_u8PortNumber)
+ 56e:	81 30       	cpi	r24, 0x01	; 1
+ 570:	91 f0       	breq	.+36     	; 0x596 <MDIO_u8GetPinValue+0x28>
+ 572:	81 30       	cpi	r24, 0x01	; 1
+ 574:	30 f0       	brcs	.+12     	; 0x582 <MDIO_u8GetPinValue+0x14>
+ 576:	82 30       	cpi	r24, 0x02	; 2
+ 578:	c1 f0       	breq	.+48     	; 0x5aa <MDIO_u8GetPinValue+0x3c>
+ 57a:	83 30       	cpi	r24, 0x03	; 3
+ 57c:	01 f1       	breq	.+64     	; 0x5be <MDIO_u8GetPinValue+0x50>
+ 57e:	80 e0       	ldi	r24, 0x00	; 0
+ 580:	08 95       	ret
+	{
+		case MDIO_PORTA:
+		{
+			L_u8PinInput = GPIOA->PIN & (1<<ARG_u8PinNumber);
+ 582:	29 b3       	in	r18, 0x19	; 25
+ 584:	81 e0       	ldi	r24, 0x01	; 1
+ 586:	90 e0       	ldi	r25, 0x00	; 0
+ 588:	02 c0       	rjmp	.+4      	; 0x58e <MDIO_u8GetPinValue+0x20>
+ 58a:	88 0f       	add	r24, r24
+ 58c:	99 1f       	adc	r25, r25
+ 58e:	6a 95       	dec	r22
+ 590:	e2 f7       	brpl	.-8      	; 0x58a <MDIO_u8GetPinValue+0x1c>
+ 592:	82 23       	and	r24, r18
+ 594:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTB:
+		{
+			L_u8PinInput = GPIOB->PIN & (1<<ARG_u8PinNumber);
+ 596:	26 b3       	in	r18, 0x16	; 22
+ 598:	81 e0       	ldi	r24, 0x01	; 1
+ 59a:	90 e0       	ldi	r25, 0x00	; 0
+ 59c:	02 c0       	rjmp	.+4      	; 0x5a2 <MDIO_u8GetPinValue+0x34>
+ 59e:	88 0f       	add	r24, r24
+ 5a0:	99 1f       	adc	r25, r25
+ 5a2:	6a 95       	dec	r22
+ 5a4:	e2 f7       	brpl	.-8      	; 0x59e <MDIO_u8GetPinValue+0x30>
+ 5a6:	82 23       	and	r24, r18
+ 5a8:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTC:
+		{
+			L_u8PinInput = GPIOC->PIN & (1<<ARG_u8PinNumber);
+ 5aa:	23 b3       	in	r18, 0x13	; 19
+ 5ac:	81 e0       	ldi	r24, 0x01	; 1
+ 5ae:	90 e0       	ldi	r25, 0x00	; 0
+ 5b0:	02 c0       	rjmp	.+4      	; 0x5b6 <MDIO_u8GetPinValue+0x48>
+ 5b2:	88 0f       	add	r24, r24
+ 5b4:	99 1f       	adc	r25, r25
+ 5b6:	6a 95       	dec	r22
+ 5b8:	e2 f7       	brpl	.-8      	; 0x5b2 <MDIO_u8GetPinValue+0x44>
+ 5ba:	82 23       	and	r24, r18
+ 5bc:	08 95       	ret
+			break;
+		}
+		case MDIO_PORTD:
+		{
+			L_u8PinInput = GPIOD->PIN & (1<<ARG_u8PinNumber);
+ 5be:	20 b3       	in	r18, 0x10	; 16
+ 5c0:	81 e0       	ldi	r24, 0x01	; 1
+ 5c2:	90 e0       	ldi	r25, 0x00	; 0
+ 5c4:	02 c0       	rjmp	.+4      	; 0x5ca <MDIO_u8GetPinValue+0x5c>
+ 5c6:	88 0f       	add	r24, r24
+ 5c8:	99 1f       	adc	r25, r25
+ 5ca:	6a 95       	dec	r22
+ 5cc:	e2 f7       	brpl	.-8      	; 0x5c6 <MDIO_u8GetPinValue+0x58>
+ 5ce:	82 23       	and	r24, r18
+			//Report an Error
+			break;
+		}
+	}
+	return L_u8PinInput;
+}
+ 5d0:	08 95       	ret
+
+000005d2 <MSPI_voidMasterInitialize>:
+
+
+
+void MSPI_voidMasterInitialize(void)
+{
+	GPIOB -> DDR =(1<<5)|(1<<7)|(1<<4);
+ 5d2:	80 eb       	ldi	r24, 0xB0	; 176
+ 5d4:	e6 e3       	ldi	r30, 0x36	; 54
+ 5d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 5d8:	81 83       	std	Z+1, r24	; 0x01
+	SPCR=(1<<SPE)|(1<<MSTR);
+ 5da:	80 e5       	ldi	r24, 0x50	; 80
+ 5dc:	8d b9       	out	0x0d, r24	; 13
+}
+ 5de:	08 95       	ret
+
+000005e0 <MSPI_voidSlaveInitialize>:
+void MSPI_voidSlaveInitialize(void)
+{
+	GPIOB -> DDR &= ~((1<<6)|(1<<7)|(1<<5));
+ 5e0:	e6 e3       	ldi	r30, 0x36	; 54
+ 5e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 5e4:	81 81       	ldd	r24, Z+1	; 0x01
+ 5e6:	8f 71       	andi	r24, 0x1F	; 31
+ 5e8:	81 83       	std	Z+1, r24	; 0x01
+	GPIOB -> DDR |= (1<<7);
+ 5ea:	81 81       	ldd	r24, Z+1	; 0x01
+ 5ec:	80 68       	ori	r24, 0x80	; 128
+ 5ee:	81 83       	std	Z+1, r24	; 0x01
+	SPCR = (1<<SPE);
+ 5f0:	80 e4       	ldi	r24, 0x40	; 64
+ 5f2:	8d b9       	out	0x0d, r24	; 13
+}
+ 5f4:	08 95       	ret
+
+000005f6 <MSPI_voidSendByte>:
+void MSPI_voidSendByte(u8 ARG_u8Byte)
+{
+	 SPDR=ARG_u8Byte;
+ 5f6:	8f b9       	out	0x0f, r24	; 15
+	 while(!(SPSR&(1<<SPIF)));
+ 5f8:	ee e2       	ldi	r30, 0x2E	; 46
+ 5fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 5fc:	80 81       	ld	r24, Z
+ 5fe:	88 23       	and	r24, r24
+ 600:	ec f7       	brge	.-6      	; 0x5fc <MSPI_voidSendByte+0x6>
+}
+ 602:	08 95       	ret
+
+00000604 <MSPI_u8ReadByte>:
+u8 	 MSPI_u8ReadByte()
+{
+	while(!(SPSR & (1<<SPIF)));
+ 604:	ee e2       	ldi	r30, 0x2E	; 46
+ 606:	f0 e0       	ldi	r31, 0x00	; 0
+ 608:	80 81       	ld	r24, Z
+ 60a:	88 23       	and	r24, r24
+ 60c:	ec f7       	brge	.-6      	; 0x608 <MSPI_u8ReadByte+0x4>
+		return(SPDR);
+ 60e:	8f b1       	in	r24, 0x0f	; 15
+ 610:	08 95       	ret
+
+00000612 <MUART_voidInit>:
+
+void MUART_voidInit(void)
+{
+	int Baud=51;
+
+	UBRRH=(Baud>>8);
+ 612:	e0 e4       	ldi	r30, 0x40	; 64
+ 614:	f0 e0       	ldi	r31, 0x00	; 0
+ 616:	10 82       	st	Z, r1
+	UBRRL = Baud;
+ 618:	83 e3       	ldi	r24, 0x33	; 51
+ 61a:	89 b9       	out	0x09, r24	; 9
+
+	UCSRB =(1<<RXEN) | (1<<TXEN);
+ 61c:	88 e1       	ldi	r24, 0x18	; 24
+ 61e:	8a b9       	out	0x0a, r24	; 10
+	UCSRC =(1<<URSEL)|(1<<UCSZ0) |(1<<UCSZ1);
+ 620:	86 e8       	ldi	r24, 0x86	; 134
+ 622:	80 83       	st	Z, r24
+}
+ 624:	08 95       	ret
+
+00000626 <MUART_voidRecieve>:
+
+u8 MUART_voidRecieve(void)
+{
+	while((UCSRA&(1<<RXC))==0);
+ 626:	eb e2       	ldi	r30, 0x2B	; 43
+ 628:	f0 e0       	ldi	r31, 0x00	; 0
+ 62a:	80 81       	ld	r24, Z
+ 62c:	88 23       	and	r24, r24
+ 62e:	ec f7       	brge	.-6      	; 0x62a <MUART_voidRecieve+0x4>
+		return UDR;
+ 630:	8c b1       	in	r24, 0x0c	; 12
+}
+ 632:	08 95       	ret
+
+00000634 <MUART_voidSend>:
+
+void MUART_voidSend(u8 u8_Data)
+{
+ 634:	98 2f       	mov	r25, r24
+	while((UCSRA & (1<<UDRE))==0);
+ 636:	eb e2       	ldi	r30, 0x2B	; 43
+ 638:	f0 e0       	ldi	r31, 0x00	; 0
+ 63a:	80 81       	ld	r24, Z
+ 63c:	85 ff       	sbrs	r24, 5
+ 63e:	fd cf       	rjmp	.-6      	; 0x63a <MUART_voidSend+0x6>
+	UDR = u8_Data;
+ 640:	9c b9       	out	0x0c, r25	; 12
+}
+ 642:	08 95       	ret
+
+00000644 <Display_Message>:
+	  HLCD_voidWriteCommand(0xC0);
+	  HLCD_voidSetString("has opened.");
+	  _delay_ms(300);
+}
+void Display_Message(s8* String1_Line1, s8* String2_Line2)
+{
+ 644:	0f 93       	push	r16
+ 646:	1f 93       	push	r17
+ 648:	cf 93       	push	r28
+ 64a:	df 93       	push	r29
+ 64c:	ec 01       	movw	r28, r24
+ 64e:	8b 01       	movw	r16, r22
+ 650:	20 ed       	ldi	r18, 0xD0	; 208
+ 652:	37 e0       	ldi	r19, 0x07	; 7
+ 654:	48 ec       	ldi	r20, 0xC8	; 200
+ 656:	50 e0       	ldi	r21, 0x00	; 0
+ 658:	ca 01       	movw	r24, r20
+ 65a:	01 97       	sbiw	r24, 0x01	; 1
+ 65c:	f1 f7       	brne	.-4      	; 0x65a <Display_Message+0x16>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 65e:	21 50       	subi	r18, 0x01	; 1
+ 660:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 662:	d1 f7       	brne	.-12     	; 0x658 <Display_Message+0x14>
+	_delay_ms(200);
+	HLCD_voidWriteCommand(0x01);
+ 664:	81 e0       	ldi	r24, 0x01	; 1
+ 666:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 66a:	80 e2       	ldi	r24, 0x20	; 32
+ 66c:	9e e4       	ldi	r25, 0x4E	; 78
+ 66e:	01 97       	sbiw	r24, 0x01	; 1
+ 670:	f1 f7       	brne	.-4      	; 0x66e <Display_Message+0x2a>
+	_delay_ms(10);
+	HLCD_voidSetString(String1_Line1);
+ 672:	ce 01       	movw	r24, r28
+ 674:	0e 94 cb 00 	call	0x196	; 0x196 <HLCD_voidSetString>
+	HLCD_voidWriteCommand(0xC0);
+ 678:	80 ec       	ldi	r24, 0xC0	; 192
+ 67a:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	HLCD_voidSetString(String2_Line2);
+ 67e:	c8 01       	movw	r24, r16
+ 680:	0e 94 cb 00 	call	0x196	; 0x196 <HLCD_voidSetString>
+ 684:	20 e1       	ldi	r18, 0x10	; 16
+ 686:	37 e2       	ldi	r19, 0x27	; 39
+ 688:	48 ec       	ldi	r20, 0xC8	; 200
+ 68a:	50 e0       	ldi	r21, 0x00	; 0
+ 68c:	ca 01       	movw	r24, r20
+ 68e:	01 97       	sbiw	r24, 0x01	; 1
+ 690:	f1 f7       	brne	.-4      	; 0x68e <Display_Message+0x4a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 692:	21 50       	subi	r18, 0x01	; 1
+ 694:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 696:	d1 f7       	brne	.-12     	; 0x68c <Display_Message+0x48>
+	_delay_ms(1000);
+}
+ 698:	df 91       	pop	r29
+ 69a:	cf 91       	pop	r28
+ 69c:	1f 91       	pop	r17
+ 69e:	0f 91       	pop	r16
+ 6a0:	08 95       	ret
+
+000006a2 <OpenDoor>:
+	return 0;
+}
+void OpenDoor()
+{
+	  //Rotating Motors to unlock
+	  HLCD_voidWriteCommand(0x01);
+ 6a2:	81 e0       	ldi	r24, 0x01	; 1
+ 6a4:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	  HLCD_voidSetString("(0)_(0)");
+ 6a8:	80 e6       	ldi	r24, 0x60	; 96
+ 6aa:	90 e0       	ldi	r25, 0x00	; 0
+ 6ac:	0e 94 cb 00 	call	0x196	; 0x196 <HLCD_voidSetString>
+	  HDM_voidMoveMotor(HDM_CLOCKWISE);
+ 6b0:	8a e0       	ldi	r24, 0x0A	; 10
+ 6b2:	0e 94 4c 00 	call	0x98	; 0x98 <HDM_voidMoveMotor>
+	  HDM_voidMoveMotor(HDM_ANTI_CLOCKWISE);
+ 6b6:	84 e1       	ldi	r24, 0x14	; 20
+ 6b8:	0e 94 4c 00 	call	0x98	; 0x98 <HDM_voidMoveMotor>
+	  MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN2,0x01);
+ 6bc:	80 e0       	ldi	r24, 0x00	; 0
+ 6be:	62 e0       	ldi	r22, 0x02	; 2
+ 6c0:	41 e0       	ldi	r20, 0x01	; 1
+ 6c2:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+	  HDM_voidMoveMotor(HDM_CLOCKWISE);
+ 6c6:	8a e0       	ldi	r24, 0x0A	; 10
+ 6c8:	0e 94 4c 00 	call	0x98	; 0x98 <HDM_voidMoveMotor>
+	  HDM_voidMoveMotor(HDM_ANTI_CLOCKWISE);
+ 6cc:	84 e1       	ldi	r24, 0x14	; 20
+ 6ce:	0e 94 4c 00 	call	0x98	; 0x98 <HDM_voidMoveMotor>
+	  HDM_voidMoveMotor(HDM_CLOCKWISE);
+ 6d2:	8a e0       	ldi	r24, 0x0A	; 10
+ 6d4:	0e 94 4c 00 	call	0x98	; 0x98 <HDM_voidMoveMotor>
+	  MDIO_voidSetPinValue(HDM_BRIDGEPORT,HDM_BRIDGEPIN3,0x01);
+ 6d8:	80 e0       	ldi	r24, 0x00	; 0
+ 6da:	63 e0       	ldi	r22, 0x03	; 3
+ 6dc:	41 e0       	ldi	r20, 0x01	; 1
+ 6de:	0e 94 32 02 	call	0x464	; 0x464 <MDIO_voidSetPinValue>
+	  HDM_voidStopMotor();
+ 6e2:	0e 94 41 00 	call	0x82	; 0x82 <HDM_voidStopMotor>
+	  //Displaying message after the door has been opened
+	  HLCD_voidWriteCommand(0x01);
+ 6e6:	81 e0       	ldi	r24, 0x01	; 1
+ 6e8:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 6ec:	80 e2       	ldi	r24, 0x20	; 32
+ 6ee:	9e e4       	ldi	r25, 0x4E	; 78
+ 6f0:	01 97       	sbiw	r24, 0x01	; 1
+ 6f2:	f1 f7       	brne	.-4      	; 0x6f0 <OpenDoor+0x4e>
+	  _delay_ms(10);
+	  HLCD_voidSetString("Cool The door");
+ 6f4:	88 e6       	ldi	r24, 0x68	; 104
+ 6f6:	90 e0       	ldi	r25, 0x00	; 0
+ 6f8:	0e 94 cb 00 	call	0x196	; 0x196 <HLCD_voidSetString>
+	  HLCD_voidWriteCommand(0xC0);
+ 6fc:	80 ec       	ldi	r24, 0xC0	; 192
+ 6fe:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+	  HLCD_voidSetString("has opened.");
+ 702:	86 e7       	ldi	r24, 0x76	; 118
+ 704:	90 e0       	ldi	r25, 0x00	; 0
+ 706:	0e 94 cb 00 	call	0x196	; 0x196 <HLCD_voidSetString>
+ 70a:	28 eb       	ldi	r18, 0xB8	; 184
+ 70c:	3b e0       	ldi	r19, 0x0B	; 11
+ 70e:	48 ec       	ldi	r20, 0xC8	; 200
+ 710:	50 e0       	ldi	r21, 0x00	; 0
+ 712:	ca 01       	movw	r24, r20
+ 714:	01 97       	sbiw	r24, 0x01	; 1
+ 716:	f1 f7       	brne	.-4      	; 0x714 <OpenDoor+0x72>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 718:	21 50       	subi	r18, 0x01	; 1
+ 71a:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 71c:	d1 f7       	brne	.-12     	; 0x712 <OpenDoor+0x70>
+	  _delay_ms(300);
+}
+ 71e:	08 95       	ret
+
+00000720 <main>:
+#include "HDM_Config.h"
+#include "HDM_Interface.h"
+void OpenDoor();
+void Display_Message(s8* String1_Line1, s8* String2_Line2);
+int main(void)
+{
+ 720:	2f 92       	push	r2
+ 722:	3f 92       	push	r3
+ 724:	4f 92       	push	r4
+ 726:	5f 92       	push	r5
+ 728:	6f 92       	push	r6
+ 72a:	7f 92       	push	r7
+ 72c:	8f 92       	push	r8
+ 72e:	9f 92       	push	r9
+ 730:	af 92       	push	r10
+ 732:	bf 92       	push	r11
+ 734:	cf 92       	push	r12
+ 736:	df 92       	push	r13
+ 738:	ef 92       	push	r14
+ 73a:	ff 92       	push	r15
+ 73c:	0f 93       	push	r16
+ 73e:	1f 93       	push	r17
+ 740:	df 93       	push	r29
+ 742:	cf 93       	push	r28
+ 744:	cd b7       	in	r28, 0x3d	; 61
+ 746:	de b7       	in	r29, 0x3e	; 62
+ 748:	69 97       	sbiw	r28, 0x19	; 25
+ 74a:	0f b6       	in	r0, 0x3f	; 63
+ 74c:	f8 94       	cli
+ 74e:	de bf       	out	0x3e, r29	; 62
+ 750:	0f be       	out	0x3f, r0	; 63
+ 752:	cd bf       	out	0x3d, r28	; 61
+	//Initialisations
+	HDM_voidInitialize();
+ 754:	0e 94 90 00 	call	0x120	; 0x120 <HDM_voidInitialize>
+	MSPI_voidSlaveInitialize();
+ 758:	0e 94 f0 02 	call	0x5e0	; 0x5e0 <MSPI_voidSlaveInitialize>
+	HLCD_voidInitialize();
+ 75c:	0e 94 3b 01 	call	0x276	; 0x276 <HLCD_voidInitialize>
+	u8 MasterFlag=0;
+	u8 newMessage=0;
+	//General Variables
+	u8 UserInput;
+	u8 Password[5];
+	u8 Passright[5]= {'1','2','3','4','5'};
+ 760:	de 01       	movw	r26, r28
+ 762:	16 96       	adiw	r26, 0x06	; 6
+ 764:	e2 e4       	ldi	r30, 0x42	; 66
+ 766:	f1 e0       	ldi	r31, 0x01	; 1
+ 768:	85 e0       	ldi	r24, 0x05	; 5
+ 76a:	01 90       	ld	r0, Z+
+ 76c:	0d 92       	st	X+, r0
+ 76e:	81 50       	subi	r24, 0x01	; 1
+ 770:	e1 f7       	brne	.-8      	; 0x76a <main+0x4a>
+ 772:	bb 24       	eor	r11, r11
+ 774:	19 8a       	std	Y+17, r1	; 0x11
+ 776:	77 24       	eor	r7, r7
+ 778:	66 24       	eor	r6, r6
+ 77a:	cc 24       	eor	r12, r12
+ 77c:	18 8a       	std	Y+16, r1	; 0x10
+ 77e:	10 e0       	ldi	r17, 0x00	; 0
+ 780:	00 e0       	ldi	r16, 0x00	; 0
+ 782:	ff 24       	eor	r15, r15
+ 784:	ee 24       	eor	r14, r14
+ 786:	dd 24       	eor	r13, r13
+			}
+			if(CurrentPass_userInput==5)
+			{
+				for(CurrentPass_rightPassword=0;CurrentPass_rightPassword<5;CurrentPass_rightPassword++)
+				{
+					if(Password[CurrentPass_rightPassword] == Passright[CurrentPass_rightPassword])
+ 788:	0f 2e       	mov	r0, r31
+ 78a:	f6 e0       	ldi	r31, 0x06	; 6
+ 78c:	8f 2e       	mov	r8, r31
+ 78e:	99 24       	eor	r9, r9
+ 790:	f0 2d       	mov	r31, r0
+ 792:	8c 0e       	add	r8, r28
+ 794:	9d 1e       	adc	r9, r29
+		}
+		if(Option=='1')
+		{
+			if(newMessage==0)
+			{
+				Display_Message("Enter Your","Password: ");
+ 796:	0f 2e       	mov	r0, r31
+ 798:	f2 e8       	ldi	r31, 0x82	; 130
+ 79a:	2f 2e       	mov	r2, r31
+ 79c:	f0 e0       	ldi	r31, 0x00	; 0
+ 79e:	3f 2e       	mov	r3, r31
+ 7a0:	f0 2d       	mov	r31, r0
+					CheckOldPass_userInput--;
+					UserInput='\0';
+				}
+				if(UserInput != '0' && UserInput != '\0' && UserInput !='$')
+				{
+					PassCheck[CheckOldPass_userInput]= UserInput;
+ 7a2:	0f 2e       	mov	r0, r31
+ 7a4:	fb e0       	ldi	r31, 0x0B	; 11
+ 7a6:	4f 2e       	mov	r4, r31
+ 7a8:	55 24       	eor	r5, r5
+ 7aa:	f0 2d       	mov	r31, r0
+ 7ac:	4c 0e       	add	r4, r28
+ 7ae:	5d 1e       	adc	r5, r29
+			//This while loop is for verifying old password before changing to the new one
+			while(PasswordFlag==0)
+			{
+				if(OldMessage==0)
+				{
+					Display_Message("Enter Your","Old Pass: ");
+ 7b0:	8d e8       	ldi	r24, 0x8D	; 141
+ 7b2:	90 e0       	ldi	r25, 0x00	; 0
+ 7b4:	8a 8b       	std	Y+18, r24	; 0x12
+ 7b6:	9b 8b       	std	Y+19, r25	; 0x13
+					Display_Message("Correct Password","");
+					PasswordFlag=1;
+				}
+				if(TimeOutFlag==1)
+				{
+					Display_Message("Password Not","Correct");
+ 7b8:	80 ed       	ldi	r24, 0xD0	; 208
+ 7ba:	90 e0       	ldi	r25, 0x00	; 0
+ 7bc:	8c 8b       	std	Y+20, r24	; 0x14
+ 7be:	9d 8b       	std	Y+21, r25	; 0x15
+						}
+					}
+				}
+				if(CheckOldPass_rightPassword==5)
+				{
+					Display_Message("Correct Password","");
+ 7c0:	8e eb       	ldi	r24, 0xBE	; 190
+ 7c2:	90 e0       	ldi	r25, 0x00	; 0
+ 7c4:	8e 8b       	std	Y+22, r24	; 0x16
+ 7c6:	9f 8b       	std	Y+23, r25	; 0x17
+ 7c8:	8f ec       	ldi	r24, 0xCF	; 207
+ 7ca:	90 e0       	ldi	r25, 0x00	; 0
+ 7cc:	88 8f       	std	Y+24, r24	; 0x18
+ 7ce:	99 8f       	std	Y+25, r25	; 0x19
+ 7d0:	04 c0       	rjmp	.+8      	; 0x7da <main+0xba>
+	u8 MasterFlag=0;
+	u8 newMessage=0;
+	//General Variables
+	u8 UserInput;
+	u8 Password[5];
+	u8 Passright[5]= {'1','2','3','4','5'};
+ 7d2:	0f 2e       	mov	r0, r31
+ 7d4:	f1 e3       	ldi	r31, 0x31	; 49
+ 7d6:	bf 2e       	mov	r11, r31
+ 7d8:	f0 2d       	mov	r31, r0
+	u8 TimeOut=0;
+	u8 TimeOutFlag=0;
+	while(1)
+	{
+		//This condition to make sure only 1 option is enabled
+		MasterFlag=MSPI_u8ReadByte();
+ 7da:	0e 94 02 03 	call	0x604	; 0x604 <MSPI_u8ReadByte>
+ 7de:	98 2f       	mov	r25, r24
+		if((MasterFlag=='1'||MasterFlag=='2' )&& OptionFlag==0 )
+ 7e0:	81 53       	subi	r24, 0x31	; 49
+ 7e2:	82 30       	cpi	r24, 0x02	; 2
+ 7e4:	30 f4       	brcc	.+12     	; 0x7f2 <main+0xd2>
+ 7e6:	89 89       	ldd	r24, Y+17	; 0x11
+ 7e8:	88 23       	and	r24, r24
+ 7ea:	19 f4       	brne	.+6      	; 0x7f2 <main+0xd2>
+ 7ec:	b9 2e       	mov	r11, r25
+ 7ee:	91 e0       	ldi	r25, 0x01	; 1
+ 7f0:	99 8b       	std	Y+17, r25	; 0x11
+		{
+			Option=MasterFlag;
+			OptionFlag++;
+		}
+		if(Option=='2')
+ 7f2:	82 e3       	ldi	r24, 0x32	; 50
+ 7f4:	b8 16       	cp	r11, r24
+ 7f6:	09 f0       	breq	.+2      	; 0x7fa <main+0xda>
+ 7f8:	a7 c0       	rjmp	.+334    	; 0x948 <__stack+0xe9>
+		{
+			//This while loop is for verifying old password before changing to the new one
+			while(PasswordFlag==0)
+ 7fa:	cc 20       	and	r12, r12
+ 7fc:	09 f0       	breq	.+2      	; 0x800 <main+0xe0>
+ 7fe:	75 c0       	rjmp	.+234    	; 0x8ea <__stack+0x8b>
+					PasswordFlag=1;
+				}
+				if(TimeOutFlag==1)
+				{
+					Display_Message("Password Not","Correct");
+					TimeOut++;
+ 800:	aa 24       	eor	r10, r10
+		if(Option=='2')
+		{
+			//This while loop is for verifying old password before changing to the new one
+			while(PasswordFlag==0)
+			{
+				if(OldMessage==0)
+ 802:	ff 20       	and	r15, r15
+ 804:	29 f4       	brne	.+10     	; 0x810 <main+0xf0>
+				{
+					Display_Message("Enter Your","Old Pass: ");
+ 806:	c1 01       	movw	r24, r2
+ 808:	6a 89       	ldd	r22, Y+18	; 0x12
+ 80a:	7b 89       	ldd	r23, Y+19	; 0x13
+ 80c:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+				}
+				OldMessage++;
+				if(TimeOut==3)
+ 810:	93 e0       	ldi	r25, 0x03	; 3
+ 812:	e9 16       	cp	r14, r25
+ 814:	09 f5       	brne	.+66     	; 0x858 <main+0x138>
+				{
+					Display_Message("3 Failed Entries","System will shutdown");
+ 816:	88 e9       	ldi	r24, 0x98	; 152
+ 818:	90 e0       	ldi	r25, 0x00	; 0
+ 81a:	69 ea       	ldi	r22, 0xA9	; 169
+ 81c:	70 e0       	ldi	r23, 0x00	; 0
+ 81e:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+				}
+			}
+		}
+	}
+	return 0;
+}
+ 822:	80 e0       	ldi	r24, 0x00	; 0
+ 824:	90 e0       	ldi	r25, 0x00	; 0
+ 826:	69 96       	adiw	r28, 0x19	; 25
+ 828:	0f b6       	in	r0, 0x3f	; 63
+ 82a:	f8 94       	cli
+ 82c:	de bf       	out	0x3e, r29	; 62
+ 82e:	0f be       	out	0x3f, r0	; 63
+ 830:	cd bf       	out	0x3d, r28	; 61
+ 832:	cf 91       	pop	r28
+ 834:	df 91       	pop	r29
+ 836:	1f 91       	pop	r17
+ 838:	0f 91       	pop	r16
+ 83a:	ff 90       	pop	r15
+ 83c:	ef 90       	pop	r14
+ 83e:	df 90       	pop	r13
+ 840:	cf 90       	pop	r12
+ 842:	bf 90       	pop	r11
+ 844:	af 90       	pop	r10
+ 846:	9f 90       	pop	r9
+ 848:	8f 90       	pop	r8
+ 84a:	7f 90       	pop	r7
+ 84c:	6f 90       	pop	r6
+ 84e:	5f 90       	pop	r5
+ 850:	4f 90       	pop	r4
+ 852:	3f 90       	pop	r3
+ 854:	2f 90       	pop	r2
+ 856:	08 95       	ret
+				if(TimeOut==3)
+				{
+					Display_Message("3 Failed Entries","System will shutdown");
+					return 0;
+				}
+				UserInput=MSPI_u8ReadByte();
+ 858:	0e 94 02 03 	call	0x604	; 0x604 <MSPI_u8ReadByte>
+				if(UserInput=='$')
+ 85c:	84 32       	cpi	r24, 0x24	; 36
+ 85e:	21 f4       	brne	.+8      	; 0x868 <__stack+0x9>
+				{
+					HLCD_voidDeleteLastChar();
+ 860:	0e 94 f7 00 	call	0x1ee	; 0x1ee <HLCD_voidDeleteLastChar>
+					CheckOldPass_userInput--;
+ 864:	11 50       	subi	r17, 0x01	; 1
+ 866:	0b c0       	rjmp	.+22     	; 0x87e <__stack+0x1f>
+					UserInput='\0';
+				}
+				if(UserInput != '0' && UserInput != '\0' && UserInput !='$')
+ 868:	80 33       	cpi	r24, 0x30	; 48
+ 86a:	49 f0       	breq	.+18     	; 0x87e <__stack+0x1f>
+ 86c:	88 23       	and	r24, r24
+ 86e:	39 f0       	breq	.+14     	; 0x87e <__stack+0x1f>
+				{
+					PassCheck[CheckOldPass_userInput]= UserInput;
+ 870:	f2 01       	movw	r30, r4
+ 872:	e1 0f       	add	r30, r17
+ 874:	f1 1d       	adc	r31, r1
+ 876:	80 83       	st	Z, r24
+					HLCD_voidWriteData(UserInput);
+ 878:	0e 94 9a 00 	call	0x134	; 0x134 <HLCD_voidWriteData>
+					CheckOldPass_userInput++;
+ 87c:	1f 5f       	subi	r17, 0xFF	; 255
+				}
+				if(CheckOldPass_userInput==5)
+ 87e:	15 30       	cpi	r17, 0x05	; 5
+ 880:	c1 f4       	brne	.+48     	; 0x8b2 <__stack+0x53>
+				{
+					HLCD_voidWriteCommand(0x01);
+ 882:	81 e0       	ldi	r24, 0x01	; 1
+ 884:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 888:	20 e0       	ldi	r18, 0x00	; 0
+ 88a:	30 e0       	ldi	r19, 0x00	; 0
+ 88c:	02 2f       	mov	r16, r18
+					for(CheckOldPass_rightPassword=0;CheckOldPass_rightPassword<5;CheckOldPass_rightPassword++)
+					{
+						if(PassCheck[CheckOldPass_rightPassword] == Passright[CheckOldPass_rightPassword])
+ 88e:	f2 01       	movw	r30, r4
+ 890:	e2 0f       	add	r30, r18
+ 892:	f3 1f       	adc	r31, r19
+ 894:	d4 01       	movw	r26, r8
+ 896:	a2 0f       	add	r26, r18
+ 898:	b3 1f       	adc	r27, r19
+ 89a:	90 81       	ld	r25, Z
+ 89c:	8c 91       	ld	r24, X
+ 89e:	98 17       	cp	r25, r24
+ 8a0:	11 f0       	breq	.+4      	; 0x8a6 <__stack+0x47>
+						{
+							continue;
+						}
+						else
+						{
+							TimeOutFlag++;
+ 8a2:	d3 94       	inc	r13
+ 8a4:	06 c0       	rjmp	.+12     	; 0x8b2 <__stack+0x53>
+							break;
+ 8a6:	0f 5f       	subi	r16, 0xFF	; 255
+ 8a8:	2f 5f       	subi	r18, 0xFF	; 255
+ 8aa:	3f 4f       	sbci	r19, 0xFF	; 255
+					CheckOldPass_userInput++;
+				}
+				if(CheckOldPass_userInput==5)
+				{
+					HLCD_voidWriteCommand(0x01);
+					for(CheckOldPass_rightPassword=0;CheckOldPass_rightPassword<5;CheckOldPass_rightPassword++)
+ 8ac:	25 30       	cpi	r18, 0x05	; 5
+ 8ae:	31 05       	cpc	r19, r1
+ 8b0:	69 f7       	brne	.-38     	; 0x88c <__stack+0x2d>
+							TimeOutFlag++;
+							break;
+						}
+					}
+				}
+				if(CheckOldPass_rightPassword==5)
+ 8b2:	05 30       	cpi	r16, 0x05	; 5
+ 8b4:	41 f4       	brne	.+16     	; 0x8c6 <__stack+0x67>
+				{
+					Display_Message("Correct Password","");
+ 8b6:	8e 89       	ldd	r24, Y+22	; 0x16
+ 8b8:	9f 89       	ldd	r25, Y+23	; 0x17
+ 8ba:	68 8d       	ldd	r22, Y+24	; 0x18
+ 8bc:	79 8d       	ldd	r23, Y+25	; 0x19
+ 8be:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+ 8c2:	cc 24       	eor	r12, r12
+ 8c4:	c3 94       	inc	r12
+					PasswordFlag=1;
+				}
+				if(TimeOutFlag==1)
+ 8c6:	81 e0       	ldi	r24, 0x01	; 1
+ 8c8:	d8 16       	cp	r13, r24
+ 8ca:	11 f0       	breq	.+4      	; 0x8d0 <__stack+0x71>
+			{
+				if(OldMessage==0)
+				{
+					Display_Message("Enter Your","Old Pass: ");
+				}
+				OldMessage++;
+ 8cc:	f3 94       	inc	r15
+ 8ce:	0a c0       	rjmp	.+20     	; 0x8e4 <__stack+0x85>
+					Display_Message("Correct Password","");
+					PasswordFlag=1;
+				}
+				if(TimeOutFlag==1)
+				{
+					Display_Message("Password Not","Correct");
+ 8d0:	8c 89       	ldd	r24, Y+20	; 0x14
+ 8d2:	9d 89       	ldd	r25, Y+21	; 0x15
+ 8d4:	6d ed       	ldi	r22, 0xDD	; 221
+ 8d6:	70 e0       	ldi	r23, 0x00	; 0
+ 8d8:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+					TimeOut++;
+ 8dc:	e3 94       	inc	r14
+ 8de:	1a 2d       	mov	r17, r10
+ 8e0:	fa 2c       	mov	r15, r10
+ 8e2:	da 2c       	mov	r13, r10
+			OptionFlag++;
+		}
+		if(Option=='2')
+		{
+			//This while loop is for verifying old password before changing to the new one
+			while(PasswordFlag==0)
+ 8e4:	cc 20       	and	r12, r12
+ 8e6:	09 f4       	brne	.+2      	; 0x8ea <__stack+0x8b>
+ 8e8:	8c cf       	rjmp	.-232    	; 0x802 <main+0xe2>
+					CheckOldPass_userInput=0;
+					TimeOutFlag=0;
+				}
+			}
+			//After checking the correct password , install the new one
+			if(newMessage==0)
+ 8ea:	77 20       	and	r7, r7
+ 8ec:	29 f4       	brne	.+10     	; 0x8f8 <__stack+0x99>
+			{
+				Display_Message("Enter Your","New Pass: ");
+ 8ee:	c1 01       	movw	r24, r2
+ 8f0:	65 ee       	ldi	r22, 0xE5	; 229
+ 8f2:	70 e0       	ldi	r23, 0x00	; 0
+ 8f4:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+			}
+			newMessage++;
+			UserInput=MSPI_u8ReadByte();
+ 8f8:	0e 94 02 03 	call	0x604	; 0x604 <MSPI_u8ReadByte>
+			if(UserInput=='$')
+ 8fc:	84 32       	cpi	r24, 0x24	; 36
+ 8fe:	31 f4       	brne	.+12     	; 0x90c <__stack+0xad>
+			{
+				HLCD_voidDeleteLastChar();
+ 900:	0e 94 f7 00 	call	0x1ee	; 0x1ee <HLCD_voidDeleteLastChar>
+				NewPassword_counter--;
+ 904:	98 89       	ldd	r25, Y+16	; 0x10
+ 906:	91 50       	subi	r25, 0x01	; 1
+ 908:	98 8b       	std	Y+16, r25	; 0x10
+ 90a:	0e c0       	rjmp	.+28     	; 0x928 <__stack+0xc9>
+				UserInput='\0';
+			}
+			if(UserInput != '0' && UserInput != '\0' && UserInput !='$')
+ 90c:	80 33       	cpi	r24, 0x30	; 48
+ 90e:	61 f0       	breq	.+24     	; 0x928 <__stack+0xc9>
+ 910:	88 23       	and	r24, r24
+ 912:	51 f0       	breq	.+20     	; 0x928 <__stack+0xc9>
+			{
+				Passright[NewPassword_counter]=UserInput;
+ 914:	f4 01       	movw	r30, r8
+ 916:	98 89       	ldd	r25, Y+16	; 0x10
+ 918:	e9 0f       	add	r30, r25
+ 91a:	f1 1d       	adc	r31, r1
+ 91c:	80 83       	st	Z, r24
+				HLCD_voidWriteData(UserInput);
+ 91e:	0e 94 9a 00 	call	0x134	; 0x134 <HLCD_voidWriteData>
+				NewPassword_counter++;
+ 922:	88 89       	ldd	r24, Y+16	; 0x10
+ 924:	8f 5f       	subi	r24, 0xFF	; 255
+ 926:	88 8b       	std	Y+16, r24	; 0x10
+			}
+			if(NewPassword_counter==5)
+ 928:	98 89       	ldd	r25, Y+16	; 0x10
+ 92a:	95 30       	cpi	r25, 0x05	; 5
+ 92c:	11 f0       	breq	.+4      	; 0x932 <__stack+0xd3>
+			//After checking the correct password , install the new one
+			if(newMessage==0)
+			{
+				Display_Message("Enter Your","New Pass: ");
+			}
+			newMessage++;
+ 92e:	73 94       	inc	r7
+ 930:	0b c0       	rjmp	.+22     	; 0x948 <__stack+0xe9>
+				HLCD_voidWriteData(UserInput);
+				NewPassword_counter++;
+			}
+			if(NewPassword_counter==5)
+			{
+				Display_Message("New Password","Assigned !");
+ 932:	80 ef       	ldi	r24, 0xF0	; 240
+ 934:	90 e0       	ldi	r25, 0x00	; 0
+ 936:	6d ef       	ldi	r22, 0xFD	; 253
+ 938:	70 e0       	ldi	r23, 0x00	; 0
+ 93a:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+				HLCD_voidWriteCommand(0x01);
+ 93e:	81 e0       	ldi	r24, 0x01	; 1
+ 940:	0e 94 db 00 	call	0x1b6	; 0x1b6 <HLCD_voidWriteCommand>
+ 944:	77 24       	eor	r7, r7
+ 946:	06 c0       	rjmp	.+12     	; 0x954 <__stack+0xf5>
+				Option='1';
+				newMessage=0;
+			}
+		}
+		if(Option=='1')
+ 948:	81 e3       	ldi	r24, 0x31	; 49
+ 94a:	b8 16       	cp	r11, r24
+ 94c:	09 f0       	breq	.+2      	; 0x950 <__stack+0xf1>
+ 94e:	45 cf       	rjmp	.-374    	; 0x7da <main+0xba>
+		{
+			if(newMessage==0)
+ 950:	77 20       	and	r7, r7
+ 952:	29 f4       	brne	.+10     	; 0x95e <__stack+0xff>
+			{
+				Display_Message("Enter Your","Password: ");
+ 954:	c1 01       	movw	r24, r2
+ 956:	68 e0       	ldi	r22, 0x08	; 8
+ 958:	71 e0       	ldi	r23, 0x01	; 1
+ 95a:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+			}
+			newMessage++;
+ 95e:	73 94       	inc	r7
+			UserInput=MSPI_u8ReadByte();
+ 960:	0e 94 02 03 	call	0x604	; 0x604 <MSPI_u8ReadByte>
+			if(UserInput=='$')
+ 964:	84 32       	cpi	r24, 0x24	; 36
+ 966:	21 f4       	brne	.+8      	; 0x970 <__stack+0x111>
+			{
+				HLCD_voidDeleteLastChar();
+ 968:	0e 94 f7 00 	call	0x1ee	; 0x1ee <HLCD_voidDeleteLastChar>
+				CurrentPass_userInput--;
+ 96c:	6a 94       	dec	r6
+ 96e:	0e c0       	rjmp	.+28     	; 0x98c <__stack+0x12d>
+				UserInput='\0';
+			}
+			if(UserInput != '0' && UserInput != '\0' && UserInput !='$')
+ 970:	80 33       	cpi	r24, 0x30	; 48
+ 972:	61 f0       	breq	.+24     	; 0x98c <__stack+0x12d>
+ 974:	88 23       	and	r24, r24
+ 976:	51 f0       	breq	.+20     	; 0x98c <__stack+0x12d>
+			{
+				Password[CurrentPass_userInput]= UserInput;
+ 978:	e1 e0       	ldi	r30, 0x01	; 1
+ 97a:	f0 e0       	ldi	r31, 0x00	; 0
+ 97c:	ec 0f       	add	r30, r28
+ 97e:	fd 1f       	adc	r31, r29
+ 980:	e6 0d       	add	r30, r6
+ 982:	f1 1d       	adc	r31, r1
+ 984:	80 83       	st	Z, r24
+				HLCD_voidWriteData(UserInput);
+ 986:	0e 94 9a 00 	call	0x134	; 0x134 <HLCD_voidWriteData>
+				CurrentPass_userInput++;
+ 98a:	63 94       	inc	r6
+			}
+			if(CurrentPass_userInput==5)
+ 98c:	95 e0       	ldi	r25, 0x05	; 5
+ 98e:	69 16       	cp	r6, r25
+ 990:	09 f0       	breq	.+2      	; 0x994 <__stack+0x135>
+ 992:	1f cf       	rjmp	.-450    	; 0x7d2 <main+0xb2>
+ 994:	20 e0       	ldi	r18, 0x00	; 0
+ 996:	30 e0       	ldi	r19, 0x00	; 0
+ 998:	42 2f       	mov	r20, r18
+			{
+				for(CurrentPass_rightPassword=0;CurrentPass_rightPassword<5;CurrentPass_rightPassword++)
+				{
+					if(Password[CurrentPass_rightPassword] == Passright[CurrentPass_rightPassword])
+ 99a:	e1 e0       	ldi	r30, 0x01	; 1
+ 99c:	f0 e0       	ldi	r31, 0x00	; 0
+ 99e:	ec 0f       	add	r30, r28
+ 9a0:	fd 1f       	adc	r31, r29
+ 9a2:	e2 0f       	add	r30, r18
+ 9a4:	f3 1f       	adc	r31, r19
+ 9a6:	d4 01       	movw	r26, r8
+ 9a8:	a2 0f       	add	r26, r18
+ 9aa:	b3 1f       	adc	r27, r19
+ 9ac:	90 81       	ld	r25, Z
+ 9ae:	8c 91       	ld	r24, X
+ 9b0:	98 17       	cp	r25, r24
+ 9b2:	31 f4       	brne	.+12     	; 0x9c0 <__stack+0x161>
+					{
+						continue;
+					}
+					else
+					{
+						break;
+ 9b4:	4f 5f       	subi	r20, 0xFF	; 255
+ 9b6:	2f 5f       	subi	r18, 0xFF	; 255
+ 9b8:	3f 4f       	sbci	r19, 0xFF	; 255
+				HLCD_voidWriteData(UserInput);
+				CurrentPass_userInput++;
+			}
+			if(CurrentPass_userInput==5)
+			{
+				for(CurrentPass_rightPassword=0;CurrentPass_rightPassword<5;CurrentPass_rightPassword++)
+ 9ba:	25 30       	cpi	r18, 0x05	; 5
+ 9bc:	31 05       	cpc	r19, r1
+ 9be:	61 f7       	brne	.-40     	; 0x998 <__stack+0x139>
+					else
+					{
+						break;
+					}
+				}
+				if(CurrentPass_rightPassword == 5)
+ 9c0:	45 30       	cpi	r20, 0x05	; 5
+ 9c2:	69 f4       	brne	.+26     	; 0x9de <__stack+0x17f>
+				{
+					Display_Message("Right Password","Door Will Open.");
+ 9c4:	83 e1       	ldi	r24, 0x13	; 19
+ 9c6:	91 e0       	ldi	r25, 0x01	; 1
+ 9c8:	62 e2       	ldi	r22, 0x22	; 34
+ 9ca:	71 e0       	ldi	r23, 0x01	; 1
+ 9cc:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+					OpenDoor();
+ 9d0:	0e 94 51 03 	call	0x6a2	; 0x6a2 <OpenDoor>
+ 9d4:	0f 2e       	mov	r0, r31
+ 9d6:	f1 e3       	ldi	r31, 0x31	; 49
+ 9d8:	bf 2e       	mov	r11, r31
+ 9da:	f0 2d       	mov	r31, r0
+ 9dc:	fe ce       	rjmp	.-516    	; 0x7da <main+0xba>
+				}
+				else
+				{
+					Display_Message("Password Is Not","Correct");
+ 9de:	82 e3       	ldi	r24, 0x32	; 50
+ 9e0:	91 e0       	ldi	r25, 0x01	; 1
+ 9e2:	6d ed       	ldi	r22, 0xDD	; 221
+ 9e4:	70 e0       	ldi	r23, 0x00	; 0
+ 9e6:	0e 94 22 03 	call	0x644	; 0x644 <Display_Message>
+ 9ea:	77 24       	eor	r7, r7
+ 9ec:	66 24       	eor	r6, r6
+ 9ee:	0f 2e       	mov	r0, r31
+ 9f0:	f1 e3       	ldi	r31, 0x31	; 49
+ 9f2:	bf 2e       	mov	r11, r31
+ 9f4:	f0 2d       	mov	r31, r0
+ 9f6:	f1 ce       	rjmp	.-542    	; 0x7da <main+0xba>
+
+000009f8 <_exit>:
+ 9f8:	f8 94       	cli
+
+000009fa <__stop_program>:
+ 9fa:	ff cf       	rjmp	.-2      	; 0x9fa <__stop_program>
