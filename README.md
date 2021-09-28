@@ -1,6 +1,7 @@
 # Digital-Lock-System
 
-Simple Digital Lock System for ATM's using KeyPad and LCD and 2 Communication protocols.  Note: This program was made using Written drivers ( DIO , SPI , UART , KPD , LCD , DCMOTOR ) not the main avr libraries
+Simple Digital Lock System for ATM's using KeyPad and LCD and 2 Communication protocols.  Note: This program was made using Written drivers ( DIO , SPI , UART , KPD , LCD , DCMOTOR ) not the main avr libraries.
+
 ( UART ) for main options - can be replaced with special characters input from keypad for simpler functionality -
 ( SPI ) for communication between the master and slave microcontroller
 
