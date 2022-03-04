@@ -13,6 +13,6 @@ Note: UART protocol can also be replaced with third microcontroller and have mor
 
 Main Program : 
 
-OPTION 1: Enter the default password - can be changed in the code 12345 - using keypad noramlly . you also can use the ON/C button to clear the last letter
+OPTION 1: Enter the default password - can be changed in the code 12345 - using keypad noramlly . you also can use the ON/C button to clear the last letter.
 
 OPTION 2: Entering the old password first ( default ) - you have 3 tries before system locks you out - after that you can assign the new password and try it once its setup.
